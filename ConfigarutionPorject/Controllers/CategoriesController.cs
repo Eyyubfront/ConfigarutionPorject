@@ -27,11 +27,9 @@ namespace ConfigarutionPorject.Controllers
 
         public async Task<ActionResult<GetCategoryDto>> GetCategories()
         {
-            var categories = await _context.Categorys.Select(c=>new GetCategoryDto { 
-            Name=c.Name
-            }).ToListAsync();
-           
-            return Ok(categories);
+            var categories = await _context.Categorys.ToListAsync();
+           var mapcategories= _mapper.Map<List<GetCategoryDto>>(categories);    
+            return Ok(mapcategories);
         }
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto dto )

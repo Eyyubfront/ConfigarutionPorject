@@ -27,16 +27,10 @@ namespace ConfigarutionPorject.Controllers
         public async Task<ActionResult<GetProductDto>> GetProduct()
         {
             var products = await _context.Products.
-                Select(c => new GetProductDto
-                {
-                    Name = c.Name
-                    , Description = c.Description,
-                    Price = c.Price,
-                    CategoryId = c.CategoryId
-
-                }).ToListAsync();
+               ToListAsync();
             ;
-            return Ok(products);
+            var mappedProducts = _mapper.Map<List<GetProductDto>>(products);
+            return Ok(mappedProducts);
         }
 
         [HttpPost]
