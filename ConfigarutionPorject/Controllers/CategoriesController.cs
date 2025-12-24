@@ -21,7 +21,6 @@ namespace ConfigarutionPorject.Controllers
         {
             _context = context;
             _mapper = mapper;
-
         }
 
         [HttpGet]
@@ -44,7 +43,7 @@ namespace ConfigarutionPorject.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory(int id, CreateCategoryDto dto)
+        public async Task<IActionResult> UpdateCategory(int id, UpdateCategoryDto dto)
         {
             var category = await _context.Categorys.FirstOrDefaultAsync(c => c.Id == id);
             if (category == null)
@@ -81,12 +80,19 @@ namespace ConfigarutionPorject.Controllers
             var category = await _context.Categorys.FirstOrDefaultAsync(c => c.Id == id);
             if (category == null)
             {
+
                 return NotFound();
             }
             _context.Categorys.Remove(category);
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+
+
+
+
+
 
 
 
